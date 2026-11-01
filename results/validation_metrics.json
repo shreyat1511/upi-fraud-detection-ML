@@ -1,0 +1,186 @@
+{
+  "dataset": "C:\\Users\\somiv\\Desktop\\UPI-Fraud-Detection-ML\\data\\raw\\PS_20174392719_1491204439457_log.csv",
+  "dataset_sha256": "16910f90577b0d981bf8ff289714510bb89bc71bff7d3f220f024e287e4eea6b",
+  "dataset_size_bytes": 493534783,
+  "dataset_framing": "Synthetic PaySim mobile-money data used as a proxy; not actual UPI data.",
+  "features": [
+    "step",
+    "type",
+    "amount"
+  ],
+  "target": "isFraud",
+  "excluded_features": [
+    "nameOrig",
+    "nameDest",
+    "oldbalanceOrg",
+    "newbalanceOrig",
+    "oldbalanceDest",
+    "newbalanceDest",
+    "isFlaggedFraud"
+  ],
+  "split_boundaries_inclusive": {
+    "train": [
+      1,
+      322
+    ],
+    "validation": [
+      323,
+      377
+    ],
+    "test": [
+      378,
+      743
+    ]
+  },
+  "split_counts": {
+    "train": {
+      "rows": 4433703,
+      "fraud": 3633,
+      "legitimate": 4430070,
+      "fraud_prevalence": 0.0008194053593576295
+    },
+    "validation": {
+      "rows": 973173,
+      "fraud": 570,
+      "legitimate": 972603,
+      "fraud_prevalence": 0.0005857129205187567
+    },
+    "test": {
+      "rows": 955744,
+      "fraud": 4010,
+      "legitimate": 951734,
+      "fraud_prevalence": 0.004195684199953125
+    }
+  },
+  "random_seed": 42,
+  "versions": {
+    "python": "3.13.7",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1"
+  },
+  "load_time_seconds_two_passes": 9.077499600010924,
+  "preprocessing": {
+    "type": "OneHotEncoder(handle_unknown='ignore', sparse_output=True), fitted on training data",
+    "amount": "log1p; StandardScaler for Logistic Regression, passthrough scaling for tree models",
+    "step": "StandardScaler for Logistic Regression, raw numeric for tree models",
+    "imbalance": "class_weight='balanced' for Logistic Regression and Decision Tree; balanced_subsample for Random Forest; validation/test unchanged"
+  },
+  "model_parameters": {
+    "Logistic Regression": {
+      "C": 1.0,
+      "solver": "lbfgs",
+      "max_iter": 200,
+      "tol": 0.0001,
+      "class_weight": "balanced"
+    },
+    "Decision Tree": {
+      "criterion": "gini",
+      "max_depth": 12,
+      "min_samples_leaf": 50,
+      "class_weight": "balanced"
+    },
+    "Random Forest": {
+      "n_estimators": 50,
+      "max_depth": 12,
+      "min_samples_leaf": 100,
+      "max_features": "sqrt",
+      "class_weight": "balanced_subsample",
+      "n_jobs": 2
+    }
+  },
+  "threshold_selection": "For each model, maximize validation F1 over thresholds; ties choose the higher threshold. Select final model by validation PR-AUC (Average Precision), then F1, then recall.",
+  "validation_metrics_by_model": {
+    "Logistic Regression": {
+      "threshold": 0.9083696007728577,
+      "precision": 0.006614093106079878,
+      "recall": 0.0456140350877193,
+      "f1": 0.011552988224838925,
+      "pr_auc_average_precision": 0.0031960945133090073,
+      "roc_auc": 0.8827410657502904,
+      "accuracy": 0.995428356520372,
+      "confusion_matrix_tn_fp_fn_tp": [
+        [
+          968698,
+          3905
+        ],
+        [
+          544,
+          26
+        ]
+      ],
+      "true_negatives": 968698,
+      "false_positives": 3905,
+      "false_negatives": 544,
+      "true_positives": 26,
+      "n": 973173,
+      "fraud_count": 570,
+      "legitimate_count": 972603,
+      "fraud_prevalence": 0.0005857129205187567,
+      "training_time_seconds": 5.50634349999018,
+      "validation_prediction_time_seconds": 0.25725560006685555
+    },
+    "Decision Tree": {
+      "threshold": 0.9988298318475131,
+      "precision": 0.8415841584158416,
+      "recall": 0.14912280701754385,
+      "f1": 0.2533532041728763,
+      "pr_auc_average_precision": 0.14631160467001392,
+      "roc_auc": 0.7349439515457624,
+      "accuracy": 0.9994851891698598,
+      "confusion_matrix_tn_fp_fn_tp": [
+        [
+          972587,
+          16
+        ],
+        [
+          485,
+          85
+        ]
+      ],
+      "true_negatives": 972587,
+      "false_positives": 16,
+      "false_negatives": 485,
+      "true_positives": 85,
+      "n": 973173,
+      "fraud_count": 570,
+      "legitimate_count": 972603,
+      "fraud_prevalence": 0.0005857129205187567,
+      "training_time_seconds": 21.2040277000051,
+      "validation_prediction_time_seconds": 0.3162488000234589
+    },
+    "Random Forest": {
+      "threshold": 0.9254154750209512,
+      "precision": 0.3888888888888889,
+      "recall": 0.17192982456140352,
+      "f1": 0.2384428223844282,
+      "pr_auc_average_precision": 0.15298543037623116,
+      "roc_auc": 0.8979258183830835,
+      "accuracy": 0.9993567433539566,
+      "confusion_matrix_tn_fp_fn_tp": [
+        [
+          972449,
+          154
+        ],
+        [
+          472,
+          98
+        ]
+      ],
+      "true_negatives": 972449,
+      "false_positives": 154,
+      "false_negatives": 472,
+      "true_positives": 98,
+      "n": 973173,
+      "fraud_count": 570,
+      "legitimate_count": 972603,
+      "fraud_prevalence": 0.0005857129205187567,
+      "training_time_seconds": 277.22844460001215,
+      "validation_prediction_time_seconds": 1.6648217000765726
+    }
+  },
+  "model_errors": {},
+  "selected_model": "Random Forest",
+  "selected_threshold": 0.9254154750209512
+}

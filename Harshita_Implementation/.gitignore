@@ -1,0 +1,55 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+virtualenv/
+pyenv/
+
+# Python bytecode and test/type/lint caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+.streamlit/credentials.toml
+secrets.toml
+credentials.json
+secrets.json
+*.pem
+*.key
+
+# Logs, temporary files, and editor backups
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.backup
+*.orig
+*.rej
+*~
+~$*
+
+# Large local datasets (the raw PaySim CSV is not committed)
+data/raw/
+data/processed/
+
+# Research PDFs excluded pending permission to redistribute
+research_materials/*.pdf
+
+# Empty draft placeholder
+research_materials/existing_ieee_paper.tex
+
+# Operating system and local editor settings
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
